@@ -30,7 +30,7 @@ end
 get '/display' do
 	#displays a roster of students in the database
 	student_info = [] #creating empty array for student info to get pushed through later
-	studentlist = db.exec("SELECT * FROM students") #set variable equal to everything in student table
+	studentlist = db.exec("SELECT * FROM students ORDER BY id") #set variable equal to everything in student table, the ORDER BY sorts the lists by ID#
 	index = 0 #setting counter to zero so we can iterate array later
 	studentlist.each do |student| #iterating all the info within the table
 		student_id = student['id'] #setting student_id equal to id in the table
