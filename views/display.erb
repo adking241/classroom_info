@@ -1,0 +1,21 @@
+<h1>Here is your roster. Please review</h1>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+	</tr>
+	<% student_info.each do |student| %>
+	<tr>
+		<td><%=student['id']%></td>
+		<td><%=student['firstname']%></td>
+		<td><%=student['lastname']%></td>
+		<td><%=student['email']%></td>
+	</tr>
+	<%end%>
+</table>
+
+<!--<form method='post' action='confirm_order'>
+	<button type='submit'>Confirm Order</button>
+</form>
