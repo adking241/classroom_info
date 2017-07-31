@@ -1,8 +1,8 @@
 require 'sinatra'
 require 'pg'
 
-load './local_env.rb' if File.exist?('./local_env.rb')
-enable :sessions
+load './local_env.rb' if File.exist?('./local_env.rb') #this file houses & hides our env file due to the gitignore file 
+enable :sessions #allows us to pass variables from route to route without using urls
 
 db_params = {
 	host: ENV['dbhost'],
@@ -10,20 +10,20 @@ db_params = {
 	dbname: ENV['dbname'],
 	user: ENV['dbuser'],
 	password: ENV['password']
-}
+} #set a variable so these connections work for us
 
-db = PG::Connection.new(db_params)
+db = PG::Connection.new(db_params) #initiates a connection to the database by setting up this variable
 
 get '/' do
 	erb :home
 end
 
-post '/studentinfo' do
+post '/studentinfo' do #we must have a post here bc we are getting input
 	#add new student to the database
-	firstname = params[:firstname]
+	firstname = params[:firstname] 
 	lastname = params[:lastname]
 	email = params[:email]
-	db.exec("INSERT into students (firstname, lastname, email) VALUES ('#{firstname}', '#{lastname}', '#{email}')")
+	db.exec("INSERT into students (firstname, lastname, email) VALUES ('#{firstname}', '#{lastname}', '#{email}')") #.exec means open a route to our database and to do what we've instructed in paratheses; first set is the column names and the 2nd set is the values from user
 	redirect '/display'
 end
 
